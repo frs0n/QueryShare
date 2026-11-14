@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+        8C0D3775B861424B99580801 /* RespringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0D3775B861424B99580802 /* RespringView.swift */; };
 		0FC852FBE5934CB86FC0E548 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586B44171EB8F4208876B7CF /* ConnectionView.swift */; };
 		20F34EA961BE17685505DCC7 /* AccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5970AC72416D88A598D4012 /* AccessManager.swift */; };
 		33F6FB28A5F3D7F3513AEF4E /* GestaltAppGroupResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F82D3236B6C4A0894E384099 /* GestaltAppGroupResolver.m */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+        8C0D3775B861424B99580802 /* RespringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespringView.swift; sourceTree = "<group>"; };
 		07FD00419DE5DF9BEE6B8AE8 /* QSLaunchServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSLaunchServices.m; sourceTree = "<group>"; };
 		09FAAD07FCD48A42F427DF70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1671E9982406C76DCFA39FB9 /* worse_query.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = worse_query.m; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				1D0D65B768914D7BAD2B6E12 /* qsicon.icon */,
 				30D6C56E9C2E946C1A57B74A /* AutomaticDiscovery.swift */,
 				586B44171EB8F4208876B7CF /* ConnectionView.swift */,
+                8C0D3775B861424B99580802 /* RespringView.swift */,
 				09FAAD07FCD48A42F427DF70 /* Info.plist */,
 				75CA385E8EB12F7AAC6FEF7F /* QueryShare.entitlements */,
 				6882AAD53FE8509799A06F96 /* QueryShareApp.swift */,
@@ -203,6 +206,7 @@
 				20F34EA961BE17685505DCC7 /* AccessManager.swift in Sources */,
 				FAE152DD07DF96BE051AE5E5 /* AutomaticDiscovery.swift in Sources */,
 				0FC852FBE5934CB86FC0E548 /* ConnectionView.swift in Sources */,
+                8C0D3775B861424B99580801 /* RespringView.swift in Sources */,
 				33F6FB28A5F3D7F3513AEF4E /* GestaltAppGroupResolver.m in Sources */,
 				45F0ACF0078925B70B3A7EFF /* GestaltCacheLease.m in Sources */,
 				5BEF8C1717B9787AA7465867 /* QSDiscovery.m in Sources */,

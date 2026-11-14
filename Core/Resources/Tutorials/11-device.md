@@ -1,6 +1,6 @@
 # 设备与硬件菜单
 
-以下均修改 MobileGestalt 的 `CacheExtra`，套用 `00-common.md` 的 `edit_plist` 与 `restore_plist`。除型号名称外，值均为 **Integer 1**。写入后重启，再到对应设置页核实。
+以下均修改 MobileGestalt 的 `CacheExtra`，套用 `00-common.md` 的 `edit_plist` 与 `restore_plist`。除型号名称外，值均为 **Integer 1**。**写入或还原校验后，要求用户点击主页底部 Respring，再重开对应设置页/App。** 开关机提示音的真实声音要通过完整关机/开机测试，Respring 不会产生开机声音。
 
 | 玩法 | 键 | 实际检查 |
 | --- | --- | --- |
@@ -29,6 +29,6 @@ record = edit_plist(s, MG, {
 })
 ```
 
-重启后查看设置中使用该字段的型号名称。此项不是系统“设备名称”设置，也不把设备变成另一型号。
+修改或还原后要求用户点击主页底部 Respring，再重开设置查看使用该字段的型号名称。此项不是系统“设备名称”设置，也不把设备变成另一型号。
 
 来源：[GestaltEdit/GestaltTweaks.swift](https://github.com/frs0n/GestaltEdit/blob/6c5f8843641e7304259a3fcc56e7c133509e155c/GestaltEdit/GestaltTweaks.swift)、[GestaltX/Capabilities.swift](https://github.com/huamidev/GestaltX/blob/72bf625befdb5e9e16d52c663e123f9fbc8ec7bf/GestaltX/Capabilities.swift)。

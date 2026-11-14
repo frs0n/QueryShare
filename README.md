@@ -4,6 +4,8 @@ An agent-driven iPhone customization bridge powered by [WorseQuery](https://gith
 
 QueryShare has two screens: Connection and Logs. The interface uses an adaptive black-and-white palette and defaults to English.
 
+The **Respring** button at the bottom of Connection reloads the system UI using the [NeoSpring WebKit method](https://github.com/rooootdev/neospring) by neonmodder123 and skadz108. After any MobileGestalt edit or restore, including Siri/AI, region, hardware identity and CacheData changes, agents ask the user to tap Respring once all writes finish and verify. Wallpapers/UI reloads use the same button; app data changes use the relevant app's relaunch steps. Agents do not default to asking for a full reboot. Respring may interrupt SFTP; reopen QueryShare and reconnect afterward.
+
 ## Connect
 
 Keep your iPhone and computer on a reachable network, allow local network access, and start sharing. Copy the command shown in the app:

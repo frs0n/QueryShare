@@ -51,6 +51,11 @@ public final class SFTPServer {
         Categories: display, device, intelligence/region, multitasking, internal flags,
         configuration, wallpapers/themes, app sounds/launch images, app data, file editing.
         Tutorials contain exact paths, keys, values, apply and restore steps.
+        After all MobileGestalt edits or restores (including Siri/AI, region,
+        hardware identity and CacheData), finish writes and verify, then ask the
+        user to tap Respring at the bottom of Connection and reconnect afterward.
+        Use Respring for wallpaper/UI reloads too; do not default to a full reboot.
+        See /Agent/00-common.md for app-specific activation steps.
 
         """
     }

@@ -34,7 +34,7 @@
 5. 将描述符完整上传到对应 `descriptors/.queryshare-<UUID>` 临时目录，逐文件比较 SHA-256，再 rename 到 `descriptors/<新 UUID>`；Mercury 用原名，遇到同名先备份并明确处理，不覆盖未知原件。
 6. 电脑端记录 provider、版本、最终相对目录、每个文件哈希。用于后续只移除这次导入，而不是清空整个 descriptors。
 7. 刷新标记在 `PB/Library/Preferences/com.apple.PosterBoard.unprotectedUserDefaults.plist` 根字典：Boolean `PBF_RESET_FILE_PROTECTIONS = True`。已有 plist 用 `edit_plist` 合并；原来不存在的文件按 `20-configuration.md` 的排他创建方法处理。
-8. 在手机刷新/重启 PosterBoard，必要时重启手机，然后打开壁纸图库选择新增项目。SFTP 不会打开或终止 PosterBoard。保留用户原壁纸选择，新增成功与实际显示分别检查。
+8. 全部文件写完并校验后，要求用户点击 QueryShare 主页底部 **Respring**，重连后打开壁纸图库选择新增项目。SFTP 不会打开或终止 PosterBoard。保留用户原壁纸选择，新增成功与实际显示分别检查。
 
 ## 用照片/视频生成壁纸
 
@@ -72,9 +72,9 @@
 
 ## 移除、重置与恢复
 
-- 移除一份导入：先核对记录中每个文件的当前哈希，只删除该记录拥有的描述符；有其他变化先停止。恢复刷新标记的原字段，再刷新手机壁纸界面。
-- 重置 Collections/Mercury/视频：先下载备份所选 provider 的整个 descriptors，清空**该 provider** 的子项，然后刷新。此操作会删除该分类的现有自定义内容，不是默认导入步骤。
-- 恢复重置前状态：把备份目录按原 provider/版本/名称写回，校验并刷新。不要把旧版本 store 硬塞进新的 store 版本。
+- 移除一份导入：先核对记录中每个文件的当前哈希，只删除该记录拥有的描述符；有其他变化先停止。恢复刷新标记的原字段，再要求用户点击主页底部 Respring 并检查壁纸界面。
+- 重置 Collections/Mercury/视频：先下载备份所选 provider 的整个 descriptors，清空**该 provider** 的子项，校验后要求用户点击主页底部 Respring。此操作会删除该分类的现有自定义内容，不是默认导入步骤。
+- 恢复重置前状态：把备份目录按原 provider/版本/名称写回，校验后要求用户点击主页底部 Respring。不要把旧版本 store 硬塞进新的 store 版本。
 
 ## 拨号键盘主题
 
@@ -85,7 +85,7 @@
 1. 枚举并备份实际文件名；从现有缓存读取地区前缀，不能固定使用 other。
 2. 逐个读取 PNG 尺寸/透明度，按原尺寸渲染替换图。mask 为浅色界面，white 为深色界面；高亮与 bold 也分别处理。上游另有 150/205/225 点尺寸和圆形裁切选项，可在电脑渲染时实现。
 3. 用 `write_existing` 替换选中的实际 PNG；只替换相关键的变体。导入 ZIP 主题时先按键号、明暗/高亮/bold 对齐目标文件，不连同其他地区缓存一起覆盖。
-4. 在手机 Phone 中切换明暗外观观察。上游特别提示**不要强制结束 Phone**，缓存可能重新生成；必要时重启。
+4. 在手机 Phone 中切换明暗外观观察。上游特别提示**不要强制结束 Phone**，缓存可能重新生成；外观切换无效时再要求用户点击主页底部 Respring。
 5. 还原写回原 PNG。明确要重置整个键盘缓存时才清空所选 TelephonyUI 目录，再打开 Phone 重新生成。
 
 来源：[Erosion PBHandler.swift](https://github.com/jailbreakdotparty/Erosion/blob/12c0a2d00c444c9b09112608b47d4d6c10e0df14/Erosion/Tweaks/PosterBoard/PBHandler.swift)、[KeypadManager.swift](https://github.com/jailbreakdotparty/Erosion/blob/12c0a2d00c444c9b09112608b47d4d6c10e0df14/Erosion/Tweaks/Keypads/KeypadManager.swift)、[GestaltX CustomizationThemes.swift](https://github.com/huamidev/GestaltX/blob/72bf625befdb5e9e16d52c663e123f9fbc8ec7bf/GestaltX/CustomizationThemes.swift)、[CustomizationStore.swift](https://github.com/huamidev/GestaltX/blob/72bf625befdb5e9e16d52c663e123f9fbc8ec7bf/GestaltX/CustomizationStore.swift)。

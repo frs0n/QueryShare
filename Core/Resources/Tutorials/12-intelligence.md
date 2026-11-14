@@ -1,6 +1,6 @@
 # 地区与智能
 
-目标文件为 `MG`。`CacheExtra` 字段使用 `00-common.md` 的 `edit_plist`；结构字节修改使用下方单独的步骤。生效需完整重启。功能是否可用还取决于机型、语言、系统与 Apple 服务。
+目标文件为 `MG`。`CacheExtra` 字段使用 `00-common.md` 的 `edit_plist`；结构字节修改使用下方单独的步骤。**本页 Siri/AI、地区、硬件身份及 CacheData 修改或还原校验后，同样要求用户点击主页底部 Respring。**功能是否可用还取决于机型、语言、系统与 Apple 服务。
 
 ## 地区代码与销售地区
 
@@ -54,7 +54,7 @@ record = edit_plist(s, MG, {('CacheExtra', 'h63QSdBCiT/z0WU6rdQv6Q'): 'LL'})
 
 ### 1. 临时伪装以下载模型
 
-保留原机 MG 备份，记录真实 ProductType。仅写入用于下载的受支持机型标识；示例 `iPhone18,1` 来自 WorkTweaks 的 iPhone 17 Pro 选项，不顺带伪装 CPU、主板、监管型号或地区。
+记录本次修改前的 ProductType，供下载完成后还原。仅写入用于下载的受支持机型标识；示例 `iPhone18,1` 来自 WorkTweaks 的 iPhone 17 Pro 选项，不顺带伪装 CPU、主板、监管型号或地区。
 
 ```python
 # DOWNLOAD_MODEL 按选定的下载机型填写，例如 'iPhone18,1'。
@@ -63,7 +63,7 @@ download_record = edit_plist(s, MG, {
 })
 ```
 
-重启，在手机的 Apple Intelligence/Siri 设置中完成模型下载。**确认下载完成后**进入下一阶段；仅出现候补/下载入口不算完成。不伪装机型时老机型无法完成此处的 Siri AI 下载。
+要求用户点击主页底部 Respring，然后在手机的 Apple Intelligence/Siri 设置中完成模型下载。**确认下载完成后**进入下一阶段；仅出现候补/下载入口不算完成。不伪装机型时老机型无法完成此处的 Siri AI 下载。
 
 ### 2. 恢复原机型，再设置 SiriMode
 
@@ -76,9 +76,9 @@ siri_record = edit_plist(s, MG, {
 })
 ```
 
-重启后测试 Siri AI、Face ID 和听写。**使用阶段不需要持续伪装机型**，不把保持伪装作为必要条件。此处也不要求顺带打开生成模型能力、改充电菜单或应用下面的旧 CacheData 配方。若之前其他工具已经改过主板/CPU等字段，先按本页“原机身份恢复”恢复那些原值，再测试。
+要求用户点击主页底部 Respring 后测试 Siri AI、Face ID 和听写。**使用阶段不需要持续伪装机型**，不把保持伪装作为必要条件。此处也不要求顺带打开生成模型能力、改充电菜单或应用下面的旧 CacheData 配方。若之前其他工具已经改过主板/CPU等字段，先按本页“原机身份恢复”恢复那些原值，再测试。
 
-撤销 SiriMode 修改：`restore_plist(s, siri_record)` 后重启。该流程按用户提供的两阶段方法整理；本次未进行真机验证。
+撤销 SiriMode 修改：`restore_plist(s, siri_record)` 后要求用户点击主页底部 Respring。该流程按用户提供的两阶段方法整理；本次未进行真机验证。
 
 ## Siri AI Cache Patch（其他项目的旧配方）
 
@@ -104,9 +104,9 @@ data[offset+21] = 2
 record = edit_plist(s, MG, {('CacheData',): bytes(data)}, expected=original)
 ```
 
-来源的组合实验还会打开本页 AI 能力、将 ProductType 设为 `iPhone18,1`（iPhone 17 Pro），以及启用 `11-device.md` 的充电上限菜单。然后刷新/重启，在“Apple Intelligence 与 Siri”尝试加入候补并等待；上游给出约 15 分钟、接电并打开存储页约一小时的下载尝试步骤，**也明确模型可能仍拒绝下载**。这是原配方记录，不是下载成功承诺，用户没要求该组合时不要顺带伪装硬件。
+来源的组合实验还会打开本页 AI 能力、将 ProductType 设为 `iPhone18,1`（iPhone 17 Pro），以及启用 `11-device.md` 的充电上限菜单。然后要求用户点击主页底部 Respring，在“Apple Intelligence 与 Siri”尝试加入候补并等待；上游给出约 15 分钟、接电并打开存储页约一小时的下载尝试步骤，**也明确模型可能仍拒绝下载**。该组合用于记录旧配方；iOS 27 的日常使用按前述 SiriMode 两阶段流程。
 
-恢复本次缓存改动使用 `restore_plist`，重启；原始字节不一定为 0，不能用“关闭就是写 0”代替原值恢复。
+恢复本次缓存改动使用 `restore_plist`，校验后要求用户点击主页底部 Respring；原始字节不一定为 0，不能用“关闭就是写 0”代替原值恢复。
 
 ## green-tea / not-green-tea / WAPI 缓存字节
 
@@ -137,15 +137,15 @@ for i, value in slots.items():
 record = edit_plist(s, MG, {('CacheData',): bytes(data)}, expected=original)
 ```
 
-不同 UUID/长度不能沿用这些偏移；需要从**该设备的** libMobileGestalt 解析对应布局。SFTP 不提供读取设备内存的方法，拿不到匹配库/布局时此教程不适用。还原使用同布局的 `restore_plist`，重启后验证；不以效果不明显为理由乱改其他字节。
+不同 UUID/长度不能沿用这些偏移；需要从**该设备的** libMobileGestalt 解析对应布局。SFTP 不提供读取设备内存的方法，拿不到匹配库/布局时此教程不适用。还原使用同布局的 `restore_plist`，校验后要求用户点击主页底部 Respring，再验证；不以效果不明显为理由乱改其他字节。
 
 ## 硬件伪装与原机身份恢复
 
 相关字段是 ProductType `h9jDsbgj7xIVeIQ8S3/X3Q`、HardwareModel `oYicEKzVTz4/CxxE05pEgQ`、CPU `5pYKlGnYYBzGvAlIU8RjEQ`、监管型号 `97JDvERpVwO+GHtthIh7hA`。来源项目存在设备伪装与分阶段激活玩法，但没有一组跨机型通用值。
 
-已有完整伪装教程/目标机型配置时，必须配套核实这四项和具体 CacheData 补丁。仅凭“较新 iPhone”名字不能生成配置。恢复时只从**同一设备、同一 CacheUUID/CacheVersion 的未伪装备份**取上述字段原值，通过 `edit_plist` 写回相应 `CacheExtra` 键，保留 AI、地区等无关字段，然后重启检查 Face ID 与听写。没有可信原始身份就不能猜测恢复值。
+完整硬件伪装使用对应机型的字段与 CacheData 配置。恢复时，从同一设备、同一 CacheUUID/CacheVersion 的原始 MG 记录取上述字段，通过 `edit_plist` 写回相应 `CacheExtra` 键，保留 AI、地区等无关字段，再要求用户点击主页底部 Respring，并检查 Face ID 与听写。
 
-WorkTweaks 的单字段 ProductType 伪装可用以下值；只改 ProductType 不等于完整硬件伪装，也可能破坏 Face ID/听写：iPhone 15 Pro/Max=`iPhone16,1`/`iPhone16,2`，16/Plus=`iPhone17,3`/`iPhone17,4`，16 Pro/Max=`iPhone17,1`/`iPhone17,2`，17/Pro/Pro Max/Air=`iPhone18,3`/`iPhone18,1`/`iPhone18,2`/`iPhone18,4`，Duo=`iPhone19,4`（上游标注 iOS 27.3+）。例如 `edit_plist(s, MG, {('CacheExtra', 'h9jDsbgj7xIVeIQ8S3/X3Q'): 'iPhone18,1'})`。关闭时恢复自己的原值，不统一写一个默认 iPhone 型号。
+WorkTweaks 的单字段 ProductType 伪装可用以下值；Siri 模型下载后按前述流程恢复原 ProductType：iPhone 15 Pro/Max=`iPhone16,1`/`iPhone16,2`，16/Plus=`iPhone17,3`/`iPhone17,4`，16 Pro/Max=`iPhone17,1`/`iPhone17,2`，17/Pro/Pro Max/Air=`iPhone18,3`/`iPhone18,1`/`iPhone18,2`/`iPhone18,4`，Duo=`iPhone19,4`（上游标注 iOS 27.3+）。例如 `edit_plist(s, MG, {('CacheExtra', 'h9jDsbgj7xIVeIQ8S3/X3Q'): 'iPhone18,1'})`。关闭时恢复自己的原值，不统一写一个默认 iPhone 型号。
 
 Siri 缓存与 ProductType 伪装来源：[WorkTweaks GestaltManager.swift](https://github.com/adnan120hz/WorkTweaks/blob/373446ff36511827a4bb18ff75bfd59b2b415af2/worse_query/GestaltManager.swift)、[TweaksView.swift](https://github.com/adnan120hz/WorkTweaks/blob/373446ff36511827a4bb18ff75bfd59b2b415af2/worse_query/TweaksView.swift)。
 

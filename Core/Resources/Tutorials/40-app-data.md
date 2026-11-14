@@ -43,7 +43,7 @@ download_tree(s, APP + '/Library', 'backup/Library')
 
 ## 重置单个 App 数据
 
-完整备份后，仅清除指定 App 的 Documents、Library、tmp 内的内容，保留容器根及系统元数据。重新打开 App 检查是否进入初始状态。若登录仍在，可能来自 Keychain；不要因此扩大删除范围。
+保留该 App 的原始数据后，清除其 Documents、Library、tmp 内的内容，保留容器根及系统元数据。重新打开 App 检查是否进入初始状态。若登录仍在，可能来自 Keychain；不要因此扩大删除范围。
 
 ## 跨 App 迁移：替换、合并、交换
 
@@ -62,7 +62,7 @@ download_tree(s, APP + '/Library', 'backup/Library')
 
 默认只选 `Library/Preferences/*.plist`（需要时递归），不连带数十 GB 的聊天数据。来源主配置名若为 `<source.bundle.id>.plist`，且目标确实使用 `<target.bundle.id>.plist`，在电脑端改文件名后部署；不要批量替换所有 plist 文件名或内容中的 bundle ID。共享 suite 配置在 AppGroup 里，需单独映射。
 
-目标 App 退出后替换配置，再重新打开读取。恢复写回原文件，对本次新建的配置则按记录删除。偏好被系统/程序缓存时重启手机，SFTP 不能强制 cfprefsd 重载。
+目标 App 退出后替换配置，再重新打开读取。恢复写回原文件，对本次新建的配置则按记录删除。若仍使用旧偏好，先确认目标 App 已完全退出并重新打开，再核查实际使用的偏好文件和 suite；需要系统界面重载时请用户点击主页底部 Respring，不默认要求完整重启。
 
 ## 重装前暂存与回迁
 

@@ -29,6 +29,7 @@ struct RootView: View {
 struct ConnectionView: View {
     @Bindable var model: ShareModel
     @State private var reveal = false
+    @State private var showRespring = false
     var body: some View {
         Form {
             Section {
@@ -75,6 +76,11 @@ struct ConnectionView: View {
                     if model.addresses.isEmpty { Text("No network address found").foregroundStyle(.secondary) }
                 }
             }
+            Section {
+                Button("Respring") { showRespring = true }
+                    .disabled(model.busy)
+            }
         }.navigationTitle("QueryShare")
+            .fullScreenCover(isPresented: $showRespring) { RespringView() }
     }
 }

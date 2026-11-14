@@ -1,20 +1,20 @@
 # 显示与界面
 
-目标文件、写入和还原方法见 `00-common.md`。本页的键均位于 MobileGestalt `CacheExtra`；值为 **Integer**，不是 Boolean。选择需要的一行，不要整表全部写入。
+目标文件、写入和还原方法见 `00-common.md`。本页的键均位于 MobileGestalt `CacheExtra`；值为 **Integer**，不是 Boolean。选择需要的一行，不要整表全部写入。**本页每项修改或还原完成并校验后，都要求用户点击主页底部 Respring。**
 
 | 玩法 | 键 → 值 | 生效/检查 |
 | --- | --- | --- |
-| 灵动岛能力 | `YlEtTtHlNesRBMal1CqRaA` → `1` | 重启后观察实时活动；布局见下段 |
-| 全天候显示 | `2OOJf1VhaM7NxfRok3HbWQ` → `1`，`j8/Omm6s1lsmTDFsXjsBfA` → `1` | 重启，显示与亮度设置；非低刷屏可能耗电/烧屏 |
+| 灵动岛能力 | `YlEtTtHlNesRBMal1CqRaA` → `1` | Respring 后观察实时活动；布局见下段 |
+| 全天候显示 | `2OOJf1VhaM7NxfRok3HbWQ` → `1`，`j8/Omm6s1lsmTDFsXjsBfA` → `1` | Respring 后检查显示与亮度设置；显示效果和耗电取决于屏幕 |
 | AOD Vibrancy | `ykpu7qyhqFweVMKtxNylWA` → `1` | 检查锁屏 AOD 渲染 |
-| AOD 高亮度 | `7brdL5xrEUWnlF9C0kdg5A` → `1` | 重启后检查；依赖面板 |
+| AOD 高亮度 | `7brdL5xrEUWnlF9C0kdg5A` → `1` | Respring 后检查；依赖面板 |
 | AOD Flipbook | `aoJSd/MXk7M40NgXTM6x+g` → `1` | 锁屏 flipbook 部件；计数单独设置 |
 | AOD Flipbook 数量 | `qqrspu7CpuPdZwSDxNY+Fg` → `3` | 上游实验值为 3，不能据此假设任意数量可用 |
-| 关闭壁纸视差 | `UIParallaxCapability` → `0` | 重启/刷新锁屏后倾斜观察 |
+| 关闭壁纸视差 | `UIParallaxCapability` → `0` | Respring 后倾斜观察锁屏 |
 | HDR 照片显示 | `a1r7npIrhXsZ7SmKRKC1eA` → `1` | 用支持 HDR 的素材观察，仍需屏幕支持 |
-| Liquid Glass 低性能渲染 | `SAGvsp6O6kAQ4fEfDJpC4Q` → `1` | 重启观察玻璃渲染；明确要关闭时写 `0`，还原时用原值 |
-| PWM 能力标记 | `6IejgN+1Fmu5/QrZFOIeNw` → `1` | 实验性，不能保证改变实际调光 |
-| DisplayPort 能力标记 | `CoWnN4xo783YGn4wLrUatA` → `1` | 实验性，需对应输出硬件 |
+| Liquid Glass 低性能渲染 | `SAGvsp6O6kAQ4fEfDJpC4Q` → `1` | Respring 后观察玻璃渲染；明确要关闭时写 `0`，还原时用原值 |
+| PWM 能力标记 | `6IejgN+1Fmu5/QrZFOIeNw` → `1` | 实际调光取决于面板 |
+| DisplayPort 能力标记 | `CoWnN4xo783YGn4wLrUatA` → `1` | 需对应输出硬件 |
 
 例：
 
@@ -42,7 +42,7 @@ record = edit_plist(s, MG, {
 })
 ```
 
-Artwork 字典缺失/类型不对时停止。subtype 是布局选择，不是实际分辨率，也不保证出现相同型号的岛形状。还原必须同时恢复本次涉及的 subtype 与能力键，不能删掉整个 Artwork 字典。
+Artwork 字典缺失/类型不对时停止。subtype 是布局选择，不是实际分辨率，也不保证出现相同型号的岛形状。还原必须同时恢复本次涉及的 subtype 与能力键，不能删掉整个 Artwork 字典。布局修改/还原校验后，要求用户点击主页底部 Respring，再看状态栏与实时活动。
 
 来源：[GestaltEdit/GestaltTweaks.swift](https://github.com/frs0n/GestaltEdit/blob/6c5f8843641e7304259a3fcc56e7c133509e155c/GestaltEdit/GestaltTweaks.swift)、[GestaltX/Capabilities.swift](https://github.com/huamidev/GestaltX/blob/72bf625befdb5e9e16d52c663e123f9fbc8ec7bf/GestaltX/Capabilities.swift)。
 
