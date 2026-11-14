@@ -1,0 +1,5 @@
+#import "worse_query.h"
+#import "GestaltAppGroupResolver.h"
+#import "pathleak.h"
+#import "QSLaunchServices.h"
+#import "QSDiscovery.h"

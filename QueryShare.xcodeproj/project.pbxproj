@@ -1,0 +1,435 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FC852FBE5934CB86FC0E548 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586B44171EB8F4208876B7CF /* ConnectionView.swift */; };
+		20F34EA961BE17685505DCC7 /* AccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5970AC72416D88A598D4012 /* AccessManager.swift */; };
+		33F6FB28A5F3D7F3513AEF4E /* GestaltAppGroupResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F82D3236B6C4A0894E384099 /* GestaltAppGroupResolver.m */; };
+		45F0ACF0078925B70B3A7EFF /* GestaltCacheLease.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA61938CE3AC714005E725A /* GestaltCacheLease.m */; };
+		522565A946A59C35489B36BF /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E2718D64CB91B5341F03F /* ShareModel.swift */; };
+		5B8C753C27F65468DE163BC7 /* QueryShareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6882AAD53FE8509799A06F96 /* QueryShareApp.swift */; };
+		5BEF8C1717B9787AA7465867 /* QSDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 554006B55F205401E59E7105 /* QSDiscovery.m */; };
+		70D92DE0F2490394180BA21B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CCB5294458C6289DBD725C1 /* Assets.xcassets */; };
+		870D605CEDC96A3E2BE3D844 /* QueryShareCore in Frameworks */ = {isa = PBXBuildFile; productRef = E960621D05CC206946657A48 /* QueryShareCore */; };
+		A4579370BA25CD45CE388434 /* QSLaunchServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FD00419DE5DF9BEE6B8AE8 /* QSLaunchServices.m */; };
+		E46243D1C4ADB569ACEA9FD9 /* pathleak.m in Sources */ = {isa = PBXBuildFile; fileRef = C76A16C97632605201656831 /* pathleak.m */; };
+		E50E7F3698C7FF8F7051076D /* worse_query.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671E9982406C76DCFA39FB9 /* worse_query.m */; };
+		FAE152DD07DF96BE051AE5E5 /* AutomaticDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D6C56E9C2E946C1A57B74A /* AutomaticDiscovery.swift */; };
+		1D0D65B768914D7BAD2B6E11 /* qsicon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 1D0D65B768914D7BAD2B6E12 /* qsicon.icon */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		07FD00419DE5DF9BEE6B8AE8 /* QSLaunchServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSLaunchServices.m; sourceTree = "<group>"; };
+		09FAAD07FCD48A42F427DF70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1671E9982406C76DCFA39FB9 /* worse_query.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = worse_query.m; sourceTree = "<group>"; };
+		2AA61938CE3AC714005E725A /* GestaltCacheLease.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestaltCacheLease.m; sourceTree = "<group>"; };
+		30D6C56E9C2E946C1A57B74A /* AutomaticDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticDiscovery.swift; sourceTree = "<group>"; };
+		30F113484D861EB7808838FF /* pathleak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pathleak.h; sourceTree = "<group>"; };
+		4C6F263BB8BFA7666D35FBE6 /* worse_query.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = worse_query.h; sourceTree = "<group>"; };
+		4CCB5294458C6289DBD725C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4F52D9B77CB2811767954CD1 /* QueryShare */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QueryShare; path = .; sourceTree = SOURCE_ROOT; };
+		554006B55F205401E59E7105 /* QSDiscovery.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSDiscovery.m; sourceTree = "<group>"; };
+		586B44171EB8F4208876B7CF /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
+		601AFC93C9849FDAEDA492DD /* QueryShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueryShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6882AAD53FE8509799A06F96 /* QueryShareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryShareApp.swift; sourceTree = "<group>"; };
+		6DA86CB64B1E0E6361FD31FF /* QSLaunchServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSLaunchServices.h; sourceTree = "<group>"; };
+		75CA385E8EB12F7AAC6FEF7F /* QueryShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QueryShare.entitlements; sourceTree = "<group>"; };
+		82B6FE20B37A73F1BDFF81FC /* QueryShare-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QueryShare-Bridging-Header.h"; sourceTree = "<group>"; };
+		8DF3DA8F219733F531D17DC9 /* GestaltCacheLease.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestaltCacheLease.h; sourceTree = "<group>"; };
+		B93F7202228DE0060C64323C /* QSDiscovery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSDiscovery.h; sourceTree = "<group>"; };
+		C436A82F5E8E45523BEB7942 /* GestaltAppGroupResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestaltAppGroupResolver.h; sourceTree = "<group>"; };
+		C76A16C97632605201656831 /* pathleak.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pathleak.m; sourceTree = "<group>"; };
+		D03E2718D64CB91B5341F03F /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
+		F5970AC72416D88A598D4012 /* AccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessManager.swift; sourceTree = "<group>"; };
+		F82D3236B6C4A0894E384099 /* GestaltAppGroupResolver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestaltAppGroupResolver.m; sourceTree = "<group>"; };
+		1D0D65B768914D7BAD2B6E12 /* qsicon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = qsicon.icon; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AD36F273FEB1F68647CD5D18 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				870D605CEDC96A3E2BE3D844 /* QueryShareCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00DBBE467029F2369CE1C525 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				601AFC93C9849FDAEDA492DD /* QueryShare.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		413B1299CF56A8A68C6B4CAC /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				C436A82F5E8E45523BEB7942 /* GestaltAppGroupResolver.h */,
+				F82D3236B6C4A0894E384099 /* GestaltAppGroupResolver.m */,
+				8DF3DA8F219733F531D17DC9 /* GestaltCacheLease.h */,
+				2AA61938CE3AC714005E725A /* GestaltCacheLease.m */,
+				30F113484D861EB7808838FF /* pathleak.h */,
+				C76A16C97632605201656831 /* pathleak.m */,
+				B93F7202228DE0060C64323C /* QSDiscovery.h */,
+				554006B55F205401E59E7105 /* QSDiscovery.m */,
+				6DA86CB64B1E0E6361FD31FF /* QSLaunchServices.h */,
+				07FD00419DE5DF9BEE6B8AE8 /* QSLaunchServices.m */,
+				82B6FE20B37A73F1BDFF81FC /* QueryShare-Bridging-Header.h */,
+				4C6F263BB8BFA7666D35FBE6 /* worse_query.h */,
+				1671E9982406C76DCFA39FB9 /* worse_query.m */,
+			);
+			path = Bridge;
+			sourceTree = "<group>";
+		};
+		5D03DB8AE864100945974C92 /* QueryShare */ = {
+			isa = PBXGroup;
+			children = (
+				F5970AC72416D88A598D4012 /* AccessManager.swift */,
+				4CCB5294458C6289DBD725C1 /* Assets.xcassets */,
+				1D0D65B768914D7BAD2B6E12 /* qsicon.icon */,
+				30D6C56E9C2E946C1A57B74A /* AutomaticDiscovery.swift */,
+				586B44171EB8F4208876B7CF /* ConnectionView.swift */,
+				09FAAD07FCD48A42F427DF70 /* Info.plist */,
+				75CA385E8EB12F7AAC6FEF7F /* QueryShare.entitlements */,
+				6882AAD53FE8509799A06F96 /* QueryShareApp.swift */,
+				D03E2718D64CB91B5341F03F /* ShareModel.swift */,
+				413B1299CF56A8A68C6B4CAC /* Bridge */,
+			);
+			path = QueryShare;
+			sourceTree = "<group>";
+		};
+		C3C7A38B22C4635893F30073 = {
+			isa = PBXGroup;
+			children = (
+				CBCAD11FCF2066E2AE895612 /* Packages */,
+				5D03DB8AE864100945974C92 /* QueryShare */,
+				00DBBE467029F2369CE1C525 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CBCAD11FCF2066E2AE895612 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				4F52D9B77CB2811767954CD1 /* QueryShare */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A86D83EF187AB3B3AF16037 /* QueryShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E400551A550E6D179C51592F /* Build configuration list for PBXNativeTarget "QueryShare" */;
+			buildPhases = (
+				A860C25AD1523C860BC27276 /* Sources */,
+				996D006E4BAD0520EDCCAA73 /* Resources */,
+				AD36F273FEB1F68647CD5D18 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QueryShare;
+			packageProductDependencies = (
+				E960621D05CC206946657A48 /* QueryShareCore */,
+			);
+			productName = QueryShare;
+			productReference = 601AFC93C9849FDAEDA492DD /* QueryShare.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D2672BAC06AFB93282BCBEB9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1A86D83EF187AB3B3AF16037 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A2F244B9BE053AA72789788B /* Build configuration list for PBXProject "QueryShare" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C3C7A38B22C4635893F30073;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				68C853E127533E30494568AF /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 00DBBE467029F2369CE1C525 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1A86D83EF187AB3B3AF16037 /* QueryShare */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		996D006E4BAD0520EDCCAA73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70D92DE0F2490394180BA21B /* Assets.xcassets in Resources */,
+				1D0D65B768914D7BAD2B6E11 /* qsicon.icon in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A860C25AD1523C860BC27276 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20F34EA961BE17685505DCC7 /* AccessManager.swift in Sources */,
+				FAE152DD07DF96BE051AE5E5 /* AutomaticDiscovery.swift in Sources */,
+				0FC852FBE5934CB86FC0E548 /* ConnectionView.swift in Sources */,
+				33F6FB28A5F3D7F3513AEF4E /* GestaltAppGroupResolver.m in Sources */,
+				45F0ACF0078925B70B3A7EFF /* GestaltCacheLease.m in Sources */,
+				5BEF8C1717B9787AA7465867 /* QSDiscovery.m in Sources */,
+				A4579370BA25CD45CE388434 /* QSLaunchServices.m in Sources */,
+				5B8C753C27F65468DE163BC7 /* QueryShareApp.swift in Sources */,
+				522565A946A59C35489B36BF /* ShareModel.swift in Sources */,
+				E46243D1C4ADB569ACEA9FD9 /* pathleak.m in Sources */,
+				E50E7F3698C7FF8F7051076D /* worse_query.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		074A60CD9E75E702E152CE28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		4D186033A571A9EA46E07C6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6BBCC291748DDE86AF47B98B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = qsicon;
+				CODE_SIGN_ENTITLEMENTS = QueryShare/QueryShare.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 32SCVH99SP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QueryShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QueryShare;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Allow computers on your local network to access shared files over SFTP.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.queryshare.QueryShare;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "QueryShare/Bridge/QueryShare-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		9094B3696E8BCC77024858E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = qsicon;
+				CODE_SIGN_ENTITLEMENTS = QueryShare/QueryShare.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 32SCVH99SP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QueryShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QueryShare;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Allow computers on your local network to access shared files over SFTP.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.queryshare.QueryShare;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "QueryShare/Bridge/QueryShare-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A2F244B9BE053AA72789788B /* Build configuration list for PBXProject "QueryShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D186033A571A9EA46E07C6D /* Debug */,
+				074A60CD9E75E702E152CE28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E400551A550E6D179C51592F /* Build configuration list for PBXNativeTarget "QueryShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9094B3696E8BCC77024858E2 /* Debug */,
+				6BBCC291748DDE86AF47B98B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		68C853E127533E30494568AF /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E960621D05CC206946657A48 /* QueryShareCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = QueryShareCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D2672BAC06AFB93282BCBEB9 /* Project object */;
+}
