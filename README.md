@@ -1,6 +1,6 @@
 # QueryShare
 
-An iPhone SFTP file server powered by [WorseQuery](https://github.com/forcequitOS/worse_query).
+An agent-driven iPhone customization bridge powered by [WorseQuery](https://github.com/forcequitOS/worse_query). QueryShare exposes the underlying file operations over SFTP so an agent on your computer can research and apply adjustments through one app.
 
 QueryShare has two screens: Connection and Logs. The interface uses an adaptive black-and-white palette and defaults to English.
 
@@ -14,7 +14,7 @@ sftp -P 2222 mobile@IPHONE_IP
 
 The default username is `mobile` and the default port is `2222`. A random password is generated once and stored in the device Keychain. Restarting the app keeps the saved password; manual changes are saved too. You can edit all three fields before starting the server.
 
-Clients receive an English SSH authentication banner explaining the WorseQuery access method and virtual directories. The host key fingerprint is available in Logs.
+The SSH banner gives a short overview and points agents to `/Agent/README.md`. This read-only SFTP directory contains categorized modification tutorials with exact paths, plist keys and types, code examples, activation and restore steps. Read the common instructions once, then only the relevant category. Agents run the included `qs.py` helpers on the computer and access phone files over SFTP. The host key fingerprint is available in Logs.
 
 ## Browse files
 

@@ -37,7 +37,7 @@ public final class SFTPServer {
     public init() {}
     public static func connectionNotice(username: String) -> String {
         """
-        QueryShare | SFTP
+        QueryShare | Agent-driven iPhone customization over SFTP
         File access: worse_query (App Group container-query sandbox escape).
         Account: \(username) | Root: /
         /Containers is a virtual index mapped to real iOS container paths.
@@ -46,6 +46,11 @@ public final class SFTPServer {
         Original absolute paths remain accessible. Changes affect the real files.
         Read/write access follows the permissions granted by iOS; this is not root access.
         SFTP only: no interactive shell, remote commands, or port forwarding.
+
+        Agent tutorials: /Agent/README.md (read over SFTP).
+        Categories: display, device, intelligence/region, multitasking, internal flags,
+        configuration, wallpapers/themes, app sounds/launch images, app data, file editing.
+        Tutorials contain exact paths, keys, values, apply and restore steps.
 
         """
     }
@@ -191,7 +196,11 @@ private final class SFTPHandler: ChannelInboundHandler {
         }
         return "/" + parts.joined(separator: "/")
     }
-    private func path(_ value: String) throws -> URL { try store.resolve(normal(value)).0 }
+    private func path(_ value: String, writing: Bool = false) throws -> URL {
+        let url = try store.resolve(normal(value)).0
+        if writing, store.isTutorial(url) { throw NSError(domain: NSPOSIXErrorDomain, code: Int(EACCES)) }
+        return url
+    }
     private func item(_ name: String) throws -> OpenItem { guard let h = handles[name] else { throw ShareError.message("Invalid handle") }; return h }
     private func attr(_ st: stat) -> ByteBuffer {
         var b = ByteBuffer(); b.writeInteger(UInt32(15)); b.writeInteger(UInt64(st.st_size)); b.writeInteger(st.st_uid); b.writeInteger(st.st_gid); b.writeInteger(UInt32(st.st_mode)); b.writeInteger(UInt32(clamping: st.st_atimespec.tv_sec)); b.writeInteger(UInt32(clamping: st.st_mtimespec.tv_sec)); return b
@@ -257,14 +266,14 @@ private final class SFTPHandler: ChannelInboundHandler {
                 guard handles.count < 128 else { return status(id, 4, "Open handle limit reached") }
                 let p = normal(try b.string()); let h: OpenItem
                 if type == 11 {
-                    let names = p == "/" && store.directRoot == nil ? store.mounts.map(\.id) : try store.listedChildren(p)
+                    let names = p == "/" && store.directRoot == nil ? (store.mounts.map(\.id) + ["Agent"]) : try store.listedChildren(p)
                     h = OpenItem(names: names, path: p)
                 } else {
                     let flags = try b.u32()
                     var f: Int32 = flags & 1 != 0 ? (flags & 2 != 0 ? O_RDWR : O_RDONLY) : O_WRONLY
                     if flags & 4 != 0 { f |= O_APPEND }; if flags & 8 != 0 { f |= O_CREAT }
                     if flags & 16 != 0 { f |= O_TRUNC }; if flags & 32 != 0 { f |= O_EXCL }
-                    let url = try path(p)
+                    let url = try path(p, writing: flags != 1)
                     let fd = open(url.resolvingSymlinksInPath().path, f | O_NONBLOCK | O_CLOEXEC | O_NOFOLLOW, 0o644)
                     guard fd >= 0 else { throw posix() }
                     var st = stat()
@@ -307,15 +316,15 @@ private final class SFTPHandler: ChannelInboundHandler {
                 return status(id, 0)
             case 9, 10: // SETSTAT, FSETSTAT
                 let token = try b.string(); let fd: Int32; let owned: Bool
-                if type == 10 { guard let existing = try item(token).fd else { return status(id, 4) }; fd = existing; owned = false }
-                else { let flags: UInt32 = b.getInteger(at: b.readerIndex) ?? 0; fd = open(try path(token).resolvingSymlinksInPath().path, (flags & 1 != 0 ? O_WRONLY : O_RDONLY) | O_NONBLOCK | O_NOFOLLOW | O_CLOEXEC); owned = true; guard fd >= 0 else { throw posix() } }
+                if type == 10 { _ = try path(item(token).path, writing: true); guard let existing = try item(token).fd else { return status(id, 4) }; fd = existing; owned = false }
+                else { let flags: UInt32 = b.getInteger(at: b.readerIndex) ?? 0; fd = open(try path(token, writing: true).resolvingSymlinksInPath().path, (flags & 1 != 0 ? O_WRONLY : O_RDONLY) | O_NONBLOCK | O_NOFOLLOW | O_CLOEXEC); owned = true; guard fd >= 0 else { throw posix() } }
                 defer { if owned { close(fd) } }; try setAttributes(&b, fd: fd); return status(id, 0)
             case 13, 15: // REMOVE, RMDIR
-                let p = try path(b.string()); try check(type == 13 ? unlink(p.path) : rmdir(p.path)); return status(id, 0)
+                let p = try path(b.string(), writing: true); try check(type == 13 ? unlink(p.path) : rmdir(p.path)); return status(id, 0)
             case 14: // MKDIR
-                let p = try path(b.string()); try check(mkdir(p.path, 0o755)); return status(id, 0)
+                let p = try path(b.string(), writing: true); try check(mkdir(p.path, 0o755)); return status(id, 0)
             case 18: // RENAME (SFTP v3 no-overwrite)
-                let from = try path(b.string()), to = try path(b.string())
+                let from = try path(b.string(), writing: true), to = try path(b.string(), writing: true)
                 try check(renamex_np(from.path, to.path, UInt32(RENAME_EXCL))); return status(id, 0)
             case 19: // READLINK
                 let p = try path(b.string()); let dest = try store.fm.destinationOfSymbolicLink(atPath: p.path)
@@ -325,7 +334,7 @@ private final class SFTPHandler: ChannelInboundHandler {
                 guard !target.hasPrefix("/") || store.directRoot != nil else { return status(id, 4, "Use a relative link target within the shared directory") }
                 let base = (normal(link) as NSString).deletingLastPathComponent
                 let virtualTarget = target.hasPrefix("/") ? target : base + "/" + target
-                let resolvedTarget = try path(virtualTarget), linkURL = try path(link)
+                let resolvedTarget = try path(virtualTarget), linkURL = try path(link, writing: true)
                 let mountA = try store.resolve(normal(virtualTarget)).1
                 let mountB = try store.resolve(normal(link)).1
                 guard mountA.id == mountB.id else { return status(id, 3, "Link and target must be in the same share") }
@@ -334,7 +343,7 @@ private final class SFTPHandler: ChannelInboundHandler {
             case 200:
                 let name = try b.string()
                 if name == "posix-rename@openssh.com" {
-                    let from = try path(b.string()), to = try path(b.string())
+                    let from = try path(b.string(), writing: true), to = try path(b.string(), writing: true)
                     try check(rename(from.path, to.path)); return status(id, 0)
                 }
                 if name == "fsync@openssh.com" {

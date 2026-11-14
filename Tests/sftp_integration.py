@@ -12,7 +12,29 @@ try:
     raise AssertionError('wrong password accepted')
 except paramiko.AuthenticationException:
     print('PASS wrong password rejected')
-t = connect(); assert b'worse_query' in (t.get_banner() or b''); print('PASS English SSH authentication banner'); s = paramiko.SFTPClient.from_transport(t); s.get_channel().settimeout(15)
+t = connect()
+assert b'/Agent/README.md' in (t.get_banner() or b'')
+s = paramiko.SFTPClient.from_transport(t); s.get_channel().settimeout(15)
+assert '12-intelligence.md' in s.listdir('/Agent')
+with s.open('/Agent/README.md', 'rb') as f:
+    assert b'00-common.md' in f.read()
+for operation in (
+    lambda: s.open('/Agent/README.md', 'wb'),
+    lambda: s.remove('/Agent/README.md'),
+    lambda: s.rename('/Agent/README.md', '/Agent/moved.md'),
+    lambda: s.posix_rename('/Agent/README.md', '/Agent/moved.md'),
+    lambda: s.chmod('/Agent/README.md', 0o600),
+    lambda: s.mkdir('/Agent/new'),
+    lambda: s.symlink('README.md', '/Agent/link'),
+):
+    try: operation()
+    except PermissionError: pass
+    else: raise AssertionError('tutorial mutation was allowed')
+with s.open('/Agent/README.md', 'rb') as f:
+    try: f.chmod(0o600)
+    except PermissionError: pass
+    else: raise AssertionError('tutorial FSETSTAT was allowed')
+print('PASS short banner, downloadable tutorials and read-only operations')
 direct = '--direct' in sys.argv
 root = '/Containers/Apps/测试 [com.example.demo]' if '--alias' in sys.argv else ('' if direct else '/' + s.listdir('/')[0])
 if '--alias' in sys.argv:
@@ -25,6 +47,28 @@ base = root + '/integration'
 try: s.mkdir(base)
 except OSError: pass
 for name in s.listdir(base): s.remove(base + "/" + name)
+import plistlib, tempfile, types
+helpers = types.ModuleType('qs')
+with s.open('/Agent/qs.py', 'rb') as f:
+    exec(compile(f.read(), 'qs.py', 'exec'), helpers.__dict__)
+fixture = base + '/tutorial.plist'
+with tempfile.TemporaryDirectory() as backups:
+    for fmt in (plistlib.FMT_BINARY, plistlib.FMT_XML):
+        original = plistlib.dumps({'CacheExtra': {'a/b': 5, 'untouched': 'yes'}}, fmt=fmt)
+        with s.open(fixture, 'wb') as f: f.write(original)
+        record = helpers.edit_plist(s, fixture, {('CacheExtra', 'a/b'): True,
+            ('CacheExtra', 'new'): 1}, backup_dir=backups, expected=original)
+        current = helpers.read(s, fixture)
+        assert current.startswith(b'bplist00') == (fmt == plistlib.FMT_BINARY)
+        assert plistlib.loads(current)['CacheExtra']['a/b'] is True
+        helpers.edit_plist(s, fixture, {('CacheExtra', 'untouched'): 'later'}, backup_dir=backups)
+        helpers.restore_plist(s, record)
+        assert plistlib.loads(helpers.read(s, fixture)) == {'CacheExtra': {'a/b': 5, 'untouched': 'later'}}
+        try: helpers.edit_plist(s, fixture, {('CacheExtra', 'a/b'): 2}, backup_dir=backups, expected=original)
+        except RuntimeError: pass
+        else: raise AssertionError('stale tutorial patch was accepted')
+s.remove(fixture)
+print('PASS tutorial helper execution, binary/XML, typed keys, scoped restore and stale-write checks')
 payload = os.urandom(2_500_123)
 with s.open(base + '/中文 100%.bin', 'wb') as f:
     f.set_pipelined(True); f.write(payload)

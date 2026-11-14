@@ -20,6 +20,12 @@ enum ShareError: LocalizedError {
 // All access, token acquisition and SFTP routing run on the server's serial IO queue.
 public final class FileStore {
     public init() {}
+    private let tutorialRoot = Bundle.module.url(forResource: "Tutorials", withExtension: nil)
+    func isTutorial(_ url: URL) -> Bool {
+        guard let root = tutorialRoot?.resolvingSymlinksInPath().path else { return false }
+        let path = url.resolvingSymlinksInPath().path
+        return path == root || path.hasPrefix(root + "/")
+    }
     private var lastFileRequest: TimeInterval = -.infinity
     public func noteFileRequest(at uptime: TimeInterval = ProcessInfo.processInfo.systemUptime) { lastFileRequest = uptime }
     public func shouldYieldDiscovery(at uptime: TimeInterval = ProcessInfo.processInfo.systemUptime) -> Bool { uptime - lastFileRequest < 0.15 }
@@ -49,6 +55,11 @@ public final class FileStore {
         let decoded = raw
         guard !decoded.contains("\0"), !decoded.contains("\\") else { throw ShareError.message("Invalid path") }
         let parts = decoded.split(separator: "/").map(String.init)
+        if parts.first == "Agent", let tutorialRoot {
+            guard !parts.contains(".."), !parts.contains(".") else { throw ShareError.message("Invalid path") }
+            let url = parts.dropFirst().reduce(tutorialRoot) { $0.appendingPathComponent($1) }
+            return (url, Mount(id: "Agent", path: tutorialRoot.path, name: "Agent tutorials"))
+        }
         if let directRoot {
             guard !parts.contains(".."), !parts.contains(".") else { throw ShareError.message("Invalid path") }
             let root = directRoot.resolvingSymlinksInPath().standardizedFileURL
@@ -93,6 +104,7 @@ public final class FileStore {
             return p.dropFirst(prefix.count).split(separator: "/").first.map(String.init)
         }
         var result = Set(names)
+        if virtual == "/", tutorialRoot != nil { result.insert("Agent") }
         do { result.formUnion(try children(resolve(virtual).0).map(\.lastPathComponent)) }
         catch { if result.isEmpty { throw error } }
         return result.sorted { $0.localizedStandardCompare($1) == .orderedAscending }

@@ -40,6 +40,22 @@ final class ContainerIndexTests: XCTestCase {
         let banner = SFTPServer.connectionNotice(username: "research")
         XCTAssertTrue(banner.contains("worse_query")); XCTAssertTrue(banner.contains("Account: research"))
         XCTAssertTrue(banner.contains("virtual index")); XCTAssertTrue(banner.contains("not root access"))
+        XCTAssertTrue(banner.contains("/Agent/README.md"))
+        XCTAssertLessThan(banner.utf8.count, 1500)
+    }
+    func testTutorialsRemainAccessibleWhenDiscoveryReplacesAliases() throws {
+        let store = FileStore()
+        store.directRoot = FileManager.default.temporaryDirectory
+        store.aliases = ["/Containers/Apps/Example": "/tmp/example"]
+        store.aliases = [:]
+        XCTAssertTrue(try store.listedChildren("/").contains("Agent"))
+        let tutorials = try store.listedChildren("/Agent")
+        XCTAssertTrue(tutorials.contains("README.md"))
+        XCTAssertTrue(tutorials.contains("qs.py"))
+        let url = try store.resolve("/Agent/10-display.md").0
+        XCTAssertTrue(store.isTutorial(url))
+        XCTAssertTrue(try String(contentsOf: url, encoding: .utf8).contains("YlEtTtHlNesRBMal1CqRaA"))
+        XCTAssertThrowsError(try store.resolve("/Agent/../outside"))
     }
     func testStalePathsAreRemovedAndVolumeChangesResetProgress() {
         var index = ContainerIndex(volume: "v1", build: "b1")
